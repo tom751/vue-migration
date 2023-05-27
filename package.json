@@ -1,0 +1,12 @@
+{
+  "name": "vue-2-3",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "vue-2",
+    "vue-3"
+  ]
+}
