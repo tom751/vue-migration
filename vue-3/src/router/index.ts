@@ -1,23 +1,30 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import AboutView from '../views/AboutView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: HomeView
-    },
-    {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
-    }
-  ]
+      component: AboutView,
+    },
+  ],
+})
+
+// This could be exported from a shared file/project (e.g. core)
+// so it's easy to find what routes have been migrated.
+// Maybe also add a lint rule to prevent same route paths in both arrays?
+const vue2RoutePaths: string[] = ['/']
+
+router.beforeEach((to, _from, next) => {
+  if (!vue2RoutePaths.includes(to.path)) {
+    next()
+  } else {
+    next(false)
+    // go to the same path on the vue 2 app
+    window.location.href = `http://${window.location.host}${to.path}`
+  }
 })
 
 export default router
