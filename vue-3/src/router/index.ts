@@ -18,7 +18,7 @@ const router = createRouter({
 const vue2RoutePaths: string[] = ['/']
 
 router.beforeEach((to, _from, next) => {
-  if (!vue2RoutePaths.includes(to.path)) {
+  if (!vue2RoutePaths.includes(to.path) || import.meta.env.DEV) {
     next()
   } else {
     next(false)

@@ -23,7 +23,7 @@ const router = new VueRouter({
 const vue3RoutePaths: string[] = ['/about']
 
 router.beforeEach((to, _from, next) => {
-  if (!vue3RoutePaths.includes(to.path)) {
+  if (!vue3RoutePaths.includes(to.path) || process.env.NODE_ENV === 'development') {
     next()
   } else {
     next(false)
